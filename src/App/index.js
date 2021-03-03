@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import styled, { css } from "styled-components";
+
 import AppLayout from "./AppLayout";
-import "./App.css";
+import AppBar from "./AppBar";
 import WelcomeMessage from "./WelcomeMessage";
+
+import "./App.css";
 
 class App extends Component {
   render() {
     return (
       <AppLayout>
+        <AppBar />
         <WelcomeMessage />
       </AppLayout>
     );
