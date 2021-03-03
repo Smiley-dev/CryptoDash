@@ -1,12 +1,13 @@
 import React from "react";
 import WelcomeMessage from "./WelcomeMessage";
 import ConfirmButton from "../Settings/ConfirmButton";
+import Page from "../Shared/Page";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function () {
   return (
-    <div>
+    <Page name="settings">
       <WelcomeMessage />
       <ConfirmButton />
-    </div>
+    </Page>
   );
 }
