@@ -1,21 +1,24 @@
 import React from "react";
 import { AppContext } from "../App/AppProvider";
-import { SelectableTile } from "../Shared/Tile";
+import { SelectableTile, DeletableTile, DisabledTile } from "../Shared/Tile";
 import CoinHeaderGrid from "./CoinHeaderGrid";
 import CoinImage from "../Shared/CoinImage";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function ({ coinKey }) {
+export default function ({ coinKey, topSection }) {
   return (
     <AppContext.Consumer>
       {({ coinList }) => {
         let coin = coinList[coinKey];
 
-        const TileClass = SelectableTile;
-
+        let TileClass = SelectableTile;
+        if (topSection) {
+          TileClass = DeletableTile;
+        }
         return (
           <TileClass>
             <CoinHeaderGrid
+              topSection={topSection}
               name={coin.CoinName}
               symbol={coin.Symbol}
             ></CoinHeaderGrid>
