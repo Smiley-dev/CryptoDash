@@ -1,3 +1,4 @@
+import { coinList } from "cryptocompare";
 import React from "react";
 import styled from "styled-components";
 import { AppContext } from "../App/AppProvider";
@@ -11,21 +12,31 @@ export const CoinGridStyled = styled.div`
   margin-top: 40px;
 `;
 
-function getCoinsToDisplay(coinList, topSection, favorites) {
-  return topSection ? favorites : Object.keys(coinList).slice(0, 100);
+function getLowerSectionCoins(coinList, filteredCoins) {
+  return (
+    (filteredCoins && Object.keys(filteredCoins)) ||
+    Object.keys(coinList).slice(0, 100)
+  );
+}
+
+function getCoinsToDisplay(coinList, topSection, favorites, filterCoins) {
+  return topSection ? favorites : getLowerSectionCoins(coinList, filterCoins);
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function ({ topSection }) {
   return (
     <AppContext.Consumer>
-      {({ coinList, favorites }) => {
+      {({ coinList, favorites, filteredCoins }) => {
         return (
           <CoinGridStyled>
-            {getCoinsToDisplay(coinList, topSection, favorites).map(
-              (coinKey) => (
-                <CoinTile topSection={topSection} coinKey={coinKey} />
-              ),
-            )}
+            {getCoinsToDisplay(
+              coinList,
+              topSection,
+              favorites,
+              filteredCoins,
+            ).map((coinKey) => (
+              <CoinTile topSection={topSection} coinKey={coinKey} />
+            ))}
           </CoinGridStyled>
         );
       }}
